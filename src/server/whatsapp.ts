@@ -1,4 +1,3 @@
-"use server";
 import makeWASocket, { DisconnectReason, useMultiFileAuthState } from 'baileys'
 import { Boom } from '@hapi/boom'
 const qrc = new Map<string, string>();
