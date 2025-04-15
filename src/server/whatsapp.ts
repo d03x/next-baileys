@@ -1,3 +1,4 @@
+"use server";
 import makeWASocket, { DisconnectReason, useMultiFileAuthState } from 'baileys'
 import { Boom } from '@hapi/boom'
 var qrc: string;
