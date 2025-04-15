@@ -2,7 +2,7 @@
 import makeWASocket, { DisconnectReason, useMultiFileAuthState } from 'baileys'
 import { Boom } from '@hapi/boom'
 //@ts-ignore
-var qrc: string;
+let qrc = new Map<string, string>();
 import qrcode from "qrcode"
 export async function connectToWhatsApp() {
     const { state, saveCreds } = await useMultiFileAuthState('auth_info_baileys')
@@ -14,7 +14,7 @@ export async function connectToWhatsApp() {
     sock.ev.on('connection.update', async (update) => {
         const { connection, lastDisconnect, qr } = update
         if (qr) {
-            qrc = qr;
+            qrc.set('dadan', qr);
         }
         if (connection === 'close') {
             const shouldReconnect = (lastDisconnect?.error as Boom)?.output?.statusCode !== DisconnectReason.loggedOut
@@ -42,5 +42,5 @@ export async function connectToWhatsApp() {
 }
 // run in main file
 export default async function getQr(): Promise<string> {
-    return await qrcode.toDataURL(qrc);
+    return await qrcode.toDataURL(qrc.get('dadan') as string);
 }
