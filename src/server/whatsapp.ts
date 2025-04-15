@@ -1,9 +1,9 @@
 "use server";
 import makeWASocket, { DisconnectReason, useMultiFileAuthState } from 'baileys'
 import { Boom } from '@hapi/boom'
-let qrc = new Map<string, string>();
+const qrc = new Map<string, string>();
 import qrcode from "qrcode"
-export async function connectToWhatsApp() {
+export async function connect_to_whatsapp() {
     const { state, saveCreds } = await useMultiFileAuthState('auth_info_baileys')
     const sock = makeWASocket({
         // can provide additional config here
@@ -20,7 +20,7 @@ export async function connectToWhatsApp() {
             console.log('connection closed due to ', lastDisconnect?.error, ', reconnecting ', shouldReconnect)
             // reconnect if not logged out
             if (shouldReconnect) {
-                connectToWhatsApp()
+                connect_to_whatsapp()
             }
         } else if (connection === 'open') {
             console.log('opened connection')
