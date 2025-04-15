@@ -1,6 +1,7 @@
 "use server";
 import makeWASocket, { DisconnectReason, useMultiFileAuthState } from 'baileys'
 import { Boom } from '@hapi/boom'
+//@ts-ignore
 var qrc: string;
 import qrcode from "qrcode"
 export async function connectToWhatsApp() {
